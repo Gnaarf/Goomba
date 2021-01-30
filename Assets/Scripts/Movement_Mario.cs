@@ -12,6 +12,7 @@ public class Movement_Mario : MonoBehaviour
     [SerializeField] float speed = 3f; // 1.5f = Goomba // 3 = Mario
     [SerializeField] float jumpFactor = 6;
     bool useKeyWasPressed = false;
+    public bool isFloored = false;
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
@@ -20,7 +21,7 @@ public class Movement_Mario : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isFloored)
             useKeyWasPressed = true;
     }
 
