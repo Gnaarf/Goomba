@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class CameraRotate : MonoBehaviour
 {
     Coroutine coroutine;
 
-    void Update()
+    public bool Rotate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && coroutine == null)
+        if (coroutine == null)
         {
             coroutine = StartCoroutine(TurnCamera(.5f));
+            return true;
         }
+        return false;
     }
 
     IEnumerator TurnCamera(float duration)

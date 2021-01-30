@@ -19,7 +19,7 @@ public class Detection_EnemyGoomba : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Floor")
+        if (collision.tag.IsActiveFloorTag())
             enemyGoomba.turnAround = !enemyGoomba.turnAround;
     }
 }

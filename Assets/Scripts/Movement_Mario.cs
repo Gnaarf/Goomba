@@ -7,7 +7,8 @@ public class Movement_Mario : MonoBehaviour
     Rigidbody2D rdbd;
 
     float horizontalInput;
-    float speed = 3f; // 1.5f = Goomba // 3 = Mario
+    [SerializeField] float speed = 3f; // 1.5f = Goomba // 3 = Mario
+    [SerializeField] float jumpFactor = 6;
     bool useKeyWasPressed = false;
     void Start()
     {
@@ -26,7 +27,7 @@ public class Movement_Mario : MonoBehaviour
         if(useKeyWasPressed)
         {
             // doStuffIfMario
-            rdbd.AddForce(Vector3.up * 6, ForceMode2D.Impulse);
+            rdbd.AddForce(Vector3.up * jumpFactor, ForceMode2D.Impulse);
 
             // doStuffIfGoomba
 
