@@ -8,6 +8,7 @@ public class Movement_EnemyGoomba : MonoBehaviour
 
     float speed = 1f;
     public bool turnAround = false;
+    public bool isDead = false;
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
@@ -15,9 +16,18 @@ public class Movement_EnemyGoomba : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(turnAround)
-            rdbd.velocity = new Vector3(speed, rdbd.velocity.y, 0);
+        if (isDead)
+        {
+            rdbd.velocity = new Vector3(0, 0, 0);
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+
         else
-            rdbd.velocity = new Vector3(-speed, rdbd.velocity.y, 0);
+        {
+            if (turnAround)
+                rdbd.velocity = new Vector3(speed, rdbd.velocity.y, 0);
+            else
+                rdbd.velocity = new Vector3(-speed, rdbd.velocity.y, 0);
+        }
     }
 }

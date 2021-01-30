@@ -22,4 +22,5 @@ public class Detection_EnemyGoomba : MonoBehaviour
         if (collision.tag.IsActiveFloorTag())
             enemyGoomba.turnAround = !enemyGoomba.turnAround;
     }
+
 }
