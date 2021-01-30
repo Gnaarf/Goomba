@@ -13,6 +13,7 @@ public class Movement_Mario : MonoBehaviour
     [SerializeField] float jumpFactor = 6;
     bool useKeyWasPressed = false;
     public bool isFloored = false;
+
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
@@ -38,19 +39,31 @@ public class Movement_Mario : MonoBehaviour
 
             useKeyWasPressed = false;
         }
-        rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
-        renderer.flipX = rdbd.velocity.x < 0;
 
-        animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
+        if (rdbd.bodyType != RigidbodyType2D.Static)
+        {
+            rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
+            renderer.flipX = rdbd.velocity.x < 0;
 
+            animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Ladder ladder = collision.GetComponent<Ladder>();
-        if (ladder != null && Input.GetKeyUp(KeyCode.L))
+        if (ladder != null)
         {
-            transform.position = ladder.OtherTrigger.transform.position + Vector3.up;
+            ladder.Register(transform);       
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null)
+        {
+            ladder.Deregister();
         }
     }
 

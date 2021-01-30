@@ -21,7 +21,7 @@ public static class Extensions
     public static bool IsFloorTag(this string tag)
     {
         return tag == "Floor" || tag == "Floor_MarioOnly" || tag == "Floor_GoombaOnly";
-
     }
+
 }
 
