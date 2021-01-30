@@ -36,7 +36,6 @@ public class Movement_Mario : MonoBehaviour
             // doStuffIfGoomba
 
 
-
             useKeyWasPressed = false;
         }
         rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
@@ -55,4 +54,5 @@ public class Movement_Mario : MonoBehaviour
         }
     }
 
+}
 }
