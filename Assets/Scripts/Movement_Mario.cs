@@ -13,6 +13,7 @@ public class Movement_Mario : MonoBehaviour
     [SerializeField] float jumpFactor = 6;
     bool useKeyWasPressed = false;
     public bool isFloored = false;
+    public bool canUseItem = false;
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
