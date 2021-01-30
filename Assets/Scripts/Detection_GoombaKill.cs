@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Detection_EnemyGoomba : MonoBehaviour
+public class Detection_GoombaKill : MonoBehaviour
 {
     Movement_EnemyGoomba enemyGoomba;
     // Start is called before the first frame update
@@ -17,10 +17,9 @@ public class Detection_EnemyGoomba : MonoBehaviour
         
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.IsActiveFloorTag())
-            enemyGoomba.turnAround = !enemyGoomba.turnAround;
+        if (collision.tag == "Player")
+            enemyGoomba.isDead = true;
     }
-
 }
