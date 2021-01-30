@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Movement_Mario : MonoBehaviour
 {
-
-    int spam = 0;
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log(spam++);
-
-        Ladder ladder = collision.GetComponent<Ladder>();
-        if (ladder != null && Input.GetKeyUp(KeyCode.L))
-        {
-            transform.position = ladder.OtherTrigger.transform.position + Vector3.up;
-        }
-    }
-
     Rigidbody2D rdbd;
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer renderer;
@@ -58,4 +44,14 @@ public class Movement_Mario : MonoBehaviour
         animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
 
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null && Input.GetKeyUp(KeyCode.L))
+        {
+            transform.position = ladder.OtherTrigger.transform.position + Vector3.up;
+        }
+    }
+
 }

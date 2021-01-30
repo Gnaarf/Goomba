@@ -6,13 +6,16 @@ public static class Extensions
 {
     public static bool IsActiveFloorTag(this string tag)
     {
+        if (tag == "Floor")
+            return true;
+
         if (Perspective.Current == PerspectiveOption.Mario)
             return tag == "Floor_MarioOnly";
 
         if (Perspective.Current == PerspectiveOption.Goomba)
             return tag == "Floor_GoombaOnly";
 
-        return tag == "Floor";
+        return false;
     }
 
     public static bool IsFloorTag(this string tag)
