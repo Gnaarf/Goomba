@@ -38,13 +38,11 @@ public class Ladder : MonoBehaviour
 
     public void Register(Transform transform)
     {
-        Debug.Log(transform != null ? "ladder" : "ladder end");
         _transformInFrontOfLadder = transform;
     }
 
     public void Deregister()
     {
-        Debug.Log("ladder end");
         _transformInFrontOfLadder = null;
     }
 }
