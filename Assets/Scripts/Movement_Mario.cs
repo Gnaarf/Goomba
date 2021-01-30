@@ -14,9 +14,18 @@ public class Movement_Mario : MonoBehaviour
     bool useKeyWasPressed = false;
     public bool isFloored = false;
     public bool canUseItem = false;
+    public string typeOfPossibleItem = null;
+    public string typeOfCurrentItem = null;
+    public GameObject gameObjectOfPossibleItem = null;
+    public Sprite fence;
+    public Sprite instrument;
+    public Sprite wateringCan;
+    SpriteRenderer itemRenderer;
+
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
+        itemRenderer = GameObject.Find("ItemHolder").GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -34,7 +43,27 @@ public class Movement_Mario : MonoBehaviour
             rdbd.AddForce(Vector3.up * jumpFactor, ForceMode2D.Impulse);
 
             // doStuffIfGoomba
-
+            // TODO change when CanJump etc. is in
+            if(canUseItem)
+            {
+                typeOfCurrentItem = typeOfPossibleItem;
+                switch (typeOfPossibleItem)
+                {
+                    case "Fence":
+                        itemRenderer.sprite = fence;
+                        break;
+                    case "Instrument":
+                        itemRenderer.sprite = instrument;
+                        break;
+                    case "Wateringcan":
+                        itemRenderer.sprite = wateringCan;
+                        break;
+                    default:
+                        Debug.LogWarning("Something didn't go right. Other string expected.");
+                        break;
+                }
+                Destroy(gameObjectOfPossibleItem);
+            }
 
             useKeyWasPressed = false;
         }
