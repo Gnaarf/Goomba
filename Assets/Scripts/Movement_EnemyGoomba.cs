@@ -6,7 +6,7 @@ public class Movement_EnemyGoomba : MonoBehaviour
 {
     Rigidbody2D rdbd;
 
-    float speed = 1f;
+    [SerializeField] float speed = 1f;
     public bool turnAround = false;
     public bool isDead = false;
     void Start()
