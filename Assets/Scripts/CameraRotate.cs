@@ -15,6 +15,7 @@ public class CameraRotate : MonoBehaviour
     private void Start()
     {
         SetNewTarget(Perspective.Current);
+        Perspective.OnPerspectiveChange += (a, b) => {if (a != b) { Rotate(); } };
     }
 
     private void Update()

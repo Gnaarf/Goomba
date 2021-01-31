@@ -13,6 +13,7 @@ public class Perspective : MonoBehaviour
 
     private void Start()
     {
+        Current = PerspectiveOption.Mario;
         SetPerspective(PerspectiveOption.Mario);
     }
 
@@ -29,12 +30,12 @@ public class Perspective : MonoBehaviour
         }
     }
 
-    private void SwitchPerspective()
+    public static void SwitchPerspective()
     {
         SetPerspective((Current == PerspectiveOption.Mario) ? PerspectiveOption.Goomba : PerspectiveOption.Mario);
     }
 
-    private void SetPerspective(PerspectiveOption perspective)
+    private static void SetPerspective(PerspectiveOption perspective)
     {
         PerspectiveOption Previous = Current;
         Current = perspective;
