@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1750276867844640268}
   m_Layer: 0
   m_Name: Stage Collider_GoombaOnly
-  m_TagString: Floor_MarioOnly
+  m_TagString: Floor_GoombaOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10694,7 +10694,7 @@ GameObject:
   - component: {fileID: 984675980869852476}
   m_Layer: 0
   m_Name: Stage Collider_GoombaOnly (1)
-  m_TagString: Floor_MarioOnly
+  m_TagString: Floor_GoombaOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
