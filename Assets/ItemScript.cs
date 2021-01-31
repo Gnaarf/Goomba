@@ -14,6 +14,10 @@ public class ItemScript : MonoBehaviour
             typeOfThisItem = "Instrument";
         if (gameObject.name.Contains("Fence"))
             typeOfThisItem = "Fence";
+        if (name.Contains("Flower"))
+            typeOfThisItem = "Flower";
+        if (gameObject.name.Contains("Boomba"))
+            typeOfThisItem = "Boomba";
     }
 
     // Update is called once per frame
