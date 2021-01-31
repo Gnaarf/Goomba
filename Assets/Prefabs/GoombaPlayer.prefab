@@ -531,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6612404636610395265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1.3333334, y: 1.3333334, z: 1}
   m_Children: []
   m_Father: {fileID: 6612404636389326048}
@@ -677,7 +677,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.01, y: 0.01}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -700,8 +700,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.01, y: 0.01}
-    newSize: {x: 0.01, y: 0.01}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -721,3 +721,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1debdde9b5637474d8e9a025fa78b855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+  animator: {fileID: 8581556386173308875}
+  renderer: {fileID: 8581556386173308887}
+  speed: 6
+  jumpFactor: 7
+  isFloored: 0
+  canUseItem: 0
+  typeOfPossibleItem: 
+  typeOfCurrentItem: 
+  gameObjectOfPossibleItem: {fileID: 0}
+  fence: {fileID: 21300000, guid: c5f29afa9b01ea948aa3cb1802adf83e, type: 3}
+  instrument: {fileID: 21300000, guid: b6c0e615493eba24399b07930cf409e5, type: 3}
+  wateringCan: {fileID: 21300000, guid: ea5633a9ecf470344a2b0db50c7e5bc0, type: 3}
+--- !u!95 &8581556386173308875
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8581556386173308885}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44637ac0e786b54488f46ec548ff8155, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

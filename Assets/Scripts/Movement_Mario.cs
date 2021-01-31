@@ -67,15 +67,20 @@ public class Movement_Mario : MonoBehaviour
 
             useKeyWasPressed = false;
         }
-        rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
-        //if (rdbd.velocity.x != 0)
+        if (rdbd.velocity.x != 0)
         {
             spriteRenderer.flipX = rdbd.velocity.x < 0;
         }
 
-        animator.SetFloat("HorizontalSpeed", Mathf.Abs(rdbd.velocity.x));
-        animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.y));
 
+        if (rdbd.bodyType != RigidbodyType2D.Static)
+        {
+            rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
+            spriteRenderer.flipX = rdbd.velocity.x < 0;
+
+            animator.SetFloat("HorizontalSpeed", Mathf.Abs(rdbd.velocity.x));
+            animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.y));
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -84,6 +89,24 @@ public class Movement_Mario : MonoBehaviour
         if (ladder != null && Input.GetKeyUp(KeyCode.L))
         {
             transform.position = ladder.OtherTrigger.transform.position + Vector3.up;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null)
+        {
+            ladder.Register(transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null)
+        {
+            ladder.Deregister();
         }
     }
 

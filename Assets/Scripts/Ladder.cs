@@ -31,18 +31,20 @@ public class Ladder : MonoBehaviour
             }
 
             _transformInFrontOfLadder.position = new Vector3(transform.position.x, _transformInFrontOfLadder.position.y, _transformInFrontOfLadder.position.z);
-            StartCoroutine(Helpers.LinearMovementCoroutine(_transformInFrontOfLadder, OtherTrigger.transform.position, 1.2f, onCoroutineFinished));
+            StartCoroutine(Helpers.LinearMovementCoroutine(_transformInFrontOfLadder, OtherTrigger.transform.position + (Vector3.up * _transformInFrontOfLadder.lossyScale.y), 1.2f, onCoroutineFinished));
 
         }
     }
 
     public void Register(Transform transform)
     {
+        Debug.Log(transform != null ? "Ladder" : "Un-Ladder");
         _transformInFrontOfLadder = transform;
     }
 
     public void Deregister()
     {
+        Debug.Log("Un-Ladder");
         _transformInFrontOfLadder = null;
     }
 }
