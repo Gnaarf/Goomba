@@ -53,6 +53,7 @@ public class Movement_Mario : MonoBehaviour
                     {
                         Animator a = gameObjectOfPossibleItem.GetComponent<Animator>();
                         a.SetTrigger("GiveSax");
+                        gameObjectOfPossibleItem.GetComponent<AudioSource>().mute = false;
                         itemRenderer.sprite = null;
                         typeOfCurrentItem = "";
                     }
@@ -64,14 +65,17 @@ public class Movement_Mario : MonoBehaviour
                         Animator a = gameObjectOfPossibleItem.GetComponent<Animator>();
                         if (!wateredOnce)
                         {
-                            a.SetInteger("Growth", a.GetInteger("Growth")+1);
+                            a.SetInteger("Growth", a.GetInteger("Growth") + 1);
                             wateredOnce = true;
                         }
                         else
                         {
-                            if(flowerTimer<0)
+                            if (flowerTimer < 0)
                             {
                                 a.SetInteger("Growth", a.GetInteger("Growth") + 1);
+                                AudioSource audio = gameObjectOfPossibleItem.GetComponent<AudioSource>();
+                                if (audio != null) audio.mute = false;
+
                                 wateredOnce = false;
                                 itemRenderer.sprite = null;
                                 typeOfCurrentItem = "";
