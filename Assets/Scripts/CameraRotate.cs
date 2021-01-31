@@ -5,7 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraRotate : MonoBehaviour
 {
+    [SerializeField] Transform goombaTransform;
+    [SerializeField] Transform marioTransform;
+
+    Transform target;
+
     Coroutine coroutine;
+
+    private void Start()
+    {
+        SetNewTarget(Perspective.Current);
+    }
+
+    private void Update()
+    {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(target.position.x, target.position.y, transform.position.z), 0.1f);
+    }
+
+    void SetNewTarget(PerspectiveOption perspective)
+    {
+        target = perspective == PerspectiveOption.Mario ? marioTransform : goombaTransform;
+    }
 
     public bool Rotate()
     {
@@ -37,5 +57,7 @@ public class CameraRotate : MonoBehaviour
         transform.RotateAround(rotationPoint, Vector3.up, 180);
 
         coroutine = null;
+
+        SetNewTarget(Perspective.Current);
     }
 }

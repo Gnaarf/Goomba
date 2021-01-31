@@ -13,8 +13,6 @@ public class Perspective : MonoBehaviour
 
     private void Start()
     {
-        OnPerspectiveChange += (oldPerspective, newPerspective) => Debug.Log("dickbutt " + newPerspective);
-        OnPerspectiveChange += (oldPerspective, newPerspective) => Debug.Log("meme " + newPerspective);
         SetPerspective(PerspectiveOption.Mario);
     }
 
