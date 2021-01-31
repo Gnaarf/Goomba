@@ -67,11 +67,14 @@ public class Movement_Mario : MonoBehaviour
 
             useKeyWasPressed = false;
         }
-        rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
-        renderer.flipX = rdbd.velocity.x < 0;
 
-        animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
+        if (rdbd.bodyType != RigidbodyType2D.Static)
+        {
+            rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
+            renderer.flipX = rdbd.velocity.x < 0;
 
+            animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -80,6 +83,24 @@ public class Movement_Mario : MonoBehaviour
         if (ladder != null && Input.GetKeyUp(KeyCode.L))
         {
             transform.position = ladder.OtherTrigger.transform.position + Vector3.up;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null)
+        {
+            ladder.Register(transform);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Ladder ladder = collision.GetComponent<Ladder>();
+        if (ladder != null)
+        {
+            ladder.Deregister();
         }
     }
 
