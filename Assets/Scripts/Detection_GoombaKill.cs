@@ -20,6 +20,6 @@ public class Detection_GoombaKill : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
-            enemyGoomba.isDead = true;
+            enemyGoomba.SetDead();
     }
 }

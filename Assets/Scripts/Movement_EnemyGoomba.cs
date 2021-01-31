@@ -9,9 +9,12 @@ public class Movement_EnemyGoomba : MonoBehaviour
     [SerializeField] float speed = 1f;
     public bool turnAround = false;
     public bool isDead = false;
+
+    Animator animator;
     void Start()
     {
         rdbd = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -29,5 +32,12 @@ public class Movement_EnemyGoomba : MonoBehaviour
             else
                 rdbd.velocity = new Vector3(-speed, rdbd.velocity.y, 0);
         }
+    }
+
+    public void SetDead()
+    {
+        if (!isDead)
+            animator.SetTrigger("Kill");
+        isDead = true;
     }
 }

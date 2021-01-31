@@ -369,8 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 96983625187039964}
   spriteRenderer: {fileID: 96983625187039936}
-  speed: 3
-  jumpFactor: 6
+  speed: 6
+  jumpFactor: 7
   isFloored: 0
   canUseItem: 0
   typeOfPossibleItem: 
