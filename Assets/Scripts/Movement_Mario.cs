@@ -6,7 +6,7 @@ public class Movement_Mario : MonoBehaviour
 {
     Rigidbody2D rdbd;
     [SerializeField] Animator animator;
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     float horizontalInput;
     [SerializeField] float speed = 3f; // 1.5f = Goomba // 3 = Mario
@@ -44,7 +44,7 @@ public class Movement_Mario : MonoBehaviour
 
             // doStuffIfGoomba
             // TODO change when CanJump etc. is in
-            if(canUseItem)
+            if (canUseItem)
             {
                 typeOfCurrentItem = typeOfPossibleItem;
                 switch (typeOfPossibleItem)
@@ -67,13 +67,19 @@ public class Movement_Mario : MonoBehaviour
 
             useKeyWasPressed = false;
         }
+        if (rdbd.velocity.x != 0)
+        {
+            spriteRenderer.flipX = rdbd.velocity.x < 0;
+        }
+
 
         if (rdbd.bodyType != RigidbodyType2D.Static)
         {
             rdbd.velocity = new Vector3(horizontalInput * speed, rdbd.velocity.y, 0);
-            renderer.flipX = rdbd.velocity.x < 0;
+            spriteRenderer.flipX = rdbd.velocity.x < 0;
 
-            animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.x));
+            animator.SetFloat("HorizontalSpeed", Mathf.Abs(rdbd.velocity.x));
+            animator.SetFloat("VerticalSpeed", Mathf.Abs(rdbd.velocity.y));
         }
     }
 
