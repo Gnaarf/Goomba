@@ -8,6 +8,8 @@ public class CameraRotate : MonoBehaviour
     [SerializeField] Transform goombaTransform;
     [SerializeField] Transform marioTransform;
 
+    [SerializeField] float rotationSpeedFactor = 1f;
+
     Transform target;
 
     Coroutine coroutine;
@@ -32,7 +34,7 @@ public class CameraRotate : MonoBehaviour
     {
         if (coroutine == null)
         {
-            coroutine = StartCoroutine(TurnCamera(.5f));
+            coroutine = StartCoroutine(TurnCamera(.5f / rotationSpeedFactor));
             return true;
         }
         return false;

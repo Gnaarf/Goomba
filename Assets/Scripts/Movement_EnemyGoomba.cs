@@ -28,9 +28,16 @@ public class Movement_EnemyGoomba : MonoBehaviour
         else
         {
             if (turnAround)
+            {
                 rdbd.velocity = new Vector3(speed, rdbd.velocity.y, 0);
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
             else
-                rdbd.velocity = new Vector3(-speed, rdbd.velocity.y, 0);
+            {
+                rdbd.velocity = new Vector3(-speed, rdbd.velocity.y, 0); 
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            animator.SetFloat("HorizontalSpeed", speed);
         }
     }
 
