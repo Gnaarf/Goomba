@@ -8,6 +8,8 @@ public class Movement_Mario : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
 
+    [SerializeField] bool canJump = false;
+
     float horizontalInput;
     [SerializeField] float speed = 3f; // 1.5f = Goomba // 3 = Mario
     [SerializeField] float jumpFactor = 6;
@@ -33,7 +35,7 @@ public class Movement_Mario : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal") * (Perspective.Current == PerspectiveOption.Mario ? 1 : -1);
-        if (Input.GetKeyDown(KeyCode.Space) && isFloored)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isFloored)
             useKeyWasPressed = true;
     }
 
@@ -93,7 +95,8 @@ public class Movement_Mario : MonoBehaviour
         if (useKeyWasPressed)
         {
             // doStuffIfMario
-            rdbd.AddForce(Vector3.up * jumpFactor, ForceMode2D.Impulse);
+            if(canJump)
+                rdbd.AddForce(Vector3.up * jumpFactor, ForceMode2D.Impulse);
 
             // doStuffIfGoomba
             // TODO change when CanJump etc. is in
