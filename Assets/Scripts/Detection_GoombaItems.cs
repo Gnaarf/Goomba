@@ -21,8 +21,10 @@ public class Detection_GoombaItems : MonoBehaviour
     {
         if (collision.tag == "Item")
         {
-            marioScript.canUseItem = true;
-            marioScript.typeOfPossibleItem = collision.gameObject.GetComponent<ItemScript>().typeOfThisItem;
+            var itemType = collision.gameObject.GetComponent<ItemScript>().typeOfThisItem;
+            if(itemType == "Wateringcan" || itemType == "Instrument" || itemType == "Fence")
+                marioScript.canUseItem = true;
+            marioScript.typeOfPossibleItem = itemType;
             marioScript.gameObjectOfPossibleItem = collision.gameObject;
         }
 

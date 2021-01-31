@@ -14,13 +14,15 @@ public class Movement_Mario : MonoBehaviour
     bool useKeyWasPressed = false;
     public bool isFloored = false;
     public bool canUseItem = false;
-    public string typeOfPossibleItem = null;
-    public string typeOfCurrentItem = null;
+    public string typeOfPossibleItem = "";
+    public string typeOfCurrentItem = "";
     public GameObject gameObjectOfPossibleItem = null;
     public Sprite fence;
     public Sprite instrument;
     public Sprite wateringCan;
     SpriteRenderer itemRenderer;
+    bool wateredOnce = false;
+    float flowerTimer = 3f;
 
     void Start()
     {
@@ -37,6 +39,53 @@ public class Movement_Mario : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (wateredOnce)
+            flowerTimer -= Time.deltaTime;
+
+        // automatic use of items when possible
+        if (typeOfPossibleItem != "")
+        {
+            switch (typeOfPossibleItem)
+            {
+
+                case "Boomba":
+                    if (typeOfCurrentItem == "Instrument")
+                    {
+                        Animator a = gameObjectOfPossibleItem.GetComponent<Animator>();
+                        a.SetTrigger("GiveSax");
+                        itemRenderer.sprite = null;
+                        typeOfCurrentItem = "";
+                    }
+                    break;
+
+                case "Flower":
+                    if (typeOfCurrentItem == "Wateringcan")
+                    {
+                        Animator a = gameObjectOfPossibleItem.GetComponent<Animator>();
+                        if (!wateredOnce)
+                        {
+                            a.SetInteger("Growth", a.GetInteger("Growth")+1);
+                            wateredOnce = true;
+                        }
+                        else
+                        {
+                            if(flowerTimer<0)
+                            {
+                                a.SetInteger("Growth", a.GetInteger("Growth") + 1);
+                                wateredOnce = false;
+                                itemRenderer.sprite = null;
+                                typeOfCurrentItem = "";
+                            }
+                        }
+
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
         if (useKeyWasPressed)
         {
             // doStuffIfMario
@@ -44,8 +93,9 @@ public class Movement_Mario : MonoBehaviour
 
             // doStuffIfGoomba
             // TODO change when CanJump etc. is in
-            if (canUseItem)
+            if (canUseItem && typeOfCurrentItem == "")
             {
+                Debug.Log(typeOfCurrentItem);
                 typeOfCurrentItem = typeOfPossibleItem;
                 switch (typeOfPossibleItem)
                 {
