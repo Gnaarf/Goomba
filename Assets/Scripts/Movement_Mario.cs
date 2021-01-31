@@ -30,7 +30,7 @@ public class Movement_Mario : MonoBehaviour
 
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
+        horizontalInput = Input.GetAxis("Horizontal") * (Perspective.Current == PerspectiveOption.Mario ? 1 : -1);
         if (Input.GetKeyDown(KeyCode.Space) && isFloored)
             useKeyWasPressed = true;
     }
