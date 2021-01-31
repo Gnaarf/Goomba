@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,14 @@ public class Perspective : MonoBehaviour
 {
     public static PerspectiveOption Current { get; private set; }
 
+    public delegate void PerspectiveChangeEventHandler(PerspectiveOption oldPerspective, PerspectiveOption newPerspective);
+
+    public static event PerspectiveChangeEventHandler OnPerspectiveChange;
+
     private void Start()
     {
+        OnPerspectiveChange += (oldPerspective, newPerspective) => Debug.Log("dickbutt " + newPerspective);
+        OnPerspectiveChange += (oldPerspective, newPerspective) => Debug.Log("meme " + newPerspective);
         SetPerspective(PerspectiveOption.Mario);
     }
 
@@ -31,6 +38,7 @@ public class Perspective : MonoBehaviour
 
     private void SetPerspective(PerspectiveOption perspective)
     {
+        PerspectiveOption Previous = Current;
         Current = perspective;
 
         Collider2D[] colliders = FindObjectsOfType<Collider2D>();
@@ -41,6 +49,12 @@ public class Perspective : MonoBehaviour
                 collider.enabled = collider.tag.IsActiveFloorTag();
             }
         }
+        PerspectiveDependentActivater[] objects = FindObjectsOfType<PerspectiveDependentActivater>();
+        foreach(PerspectiveDependentActivater obj in objects)
+        {
+            obj.gameObject.SetActive(Current == obj.ActiveOnPerspective);
+        }
+        OnPerspectiveChange.Invoke(Previous, Current);
     }
 }
 
